@@ -22,12 +22,12 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Run lint
-       run: make lint
+        run: make lint
 
     - name: Test & publish code coverage
        uses: paambaati/codeclimate-action@v2.5.5
     env:
-         CC_TEST_REPORTER_ID: 7446fba3e9e952e6f3c5f21e8277819a6cdb946138c0a0fbc7b49f30b65a112e
+        CC_TEST_REPORTER_ID: 7446fba3e9e952e6f3c5f21e8277819a6cdb946138c0a0fbc7b49f30b65a112e
     with:
         coverageCommand: make test-coverage
         debug: true
