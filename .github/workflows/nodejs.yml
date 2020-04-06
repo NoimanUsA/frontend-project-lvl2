@@ -22,7 +22,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Run lint
-        run: make lint
+      run: 
+					make lint
 
     - name: Test & publish code coverage
        uses: paambaati/codeclimate-action@v2.5.5
