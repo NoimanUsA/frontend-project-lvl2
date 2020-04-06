@@ -4,28 +4,35 @@
 name: Node.js CI
 
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  - push
+  - pull_request
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
+        node-version: [12.x,13.x]
 
-    steps:
+   steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+
+    - name: Run lint
+       run: make lint
+
+    - name: Test & publish code coverage
+       uses: paambaati/codeclimate-action@v2.5.5
+     env:
+         CC_TEST_REPORTER_ID: 7446fba3e9e952e6f3c5f21e8277819a6cdb946138c0a0fbc7b49f30b65a112e
+     with:
+        coverageCommand: make test-coverage
+        debug: true
+    	
+
       env:
         CI: true
