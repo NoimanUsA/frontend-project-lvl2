@@ -1,5 +1,10 @@
+install: install-deps
+
+install-deps:
+	npm ci
+	
 build :
-	sudo npm run build --dry-run
+	npm run build --dry-run
 
 start:
 	babel-node src/bin/gendiff.js _fixtures_/before.json _fixtures_/after.json
