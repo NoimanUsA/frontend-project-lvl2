@@ -7,11 +7,11 @@ start:
 lint :
 	npx eslint .
 
-lint-fix :
-	npx eslint . --fix
-
 test: 
 	npx jest --watch
 
 test-coverage: 
 	npx jest --coverage
+
+push: 
+	git push origin master

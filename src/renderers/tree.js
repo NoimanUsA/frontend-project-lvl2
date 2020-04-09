@@ -9,7 +9,7 @@ const stringifyObject = (obj, depth = 0) => {
   return `{\n${keys.map((el) => `${space(depth + 3)}${el}: ${obj[el]}`)}\n${space(depth + 1)}}`;
 };
 const stringifyArray = (arr) => {
-  const items = arr.map(el => `${el}`).join(',').trim();
+  const items = arr.map((el) => `${el}`).join(',').trim();
   return `[${items}]`;
 };
 const stringify = (property, depth) => {
