@@ -32,7 +32,10 @@ jobs:
           
     - name: Run lint
       run: make lint
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2b3608cf08c16ac0c6fdece1c9e1e8826dff37f2
 
     - name: Test & publish code coverage
       uses: paambaati/codeclimate-action@v2.5.5
