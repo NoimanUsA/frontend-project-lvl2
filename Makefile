@@ -1,22 +1,26 @@
+
 install: install-deps
+
+run:
+	npx babel-node 'src/bin/gendiff.js' 10
 
 install-deps:
 	npm ci
-	
-build :
-	npm run build --dry-run
 
-start:
-	babel-node src/bin/gendiff.js _fixtures_/before.json _fixtures_/after.json
+build:
+	rm -rf dist
+	npm run build
 
-lint :
+test:
+	npm test
+
+test-coverage:
+	npm test -- --coverage
+
+lint:
 	npx eslint .
 
-test: 
-	npx jest --watch
+publish:
+	npm publish
 
-test-coverage: 
-	npx jest --coverage
-
-push: 
-	git push origin master
+.PHONY: test
