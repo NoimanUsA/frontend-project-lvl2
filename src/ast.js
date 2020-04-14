@@ -15,14 +15,14 @@ const makeAst = (beforeObj, afterObj) => {
         return [...acc, { name: key, type: 'parents', children: makeAst(beforeObj[key], afterObj[key]) }];
       }
       if (areKeysIndetity(beforeObj, afterObj, key)) {
-        return [...acc, { name: key, type: 'unchanged', valueAfter: afterObj[key] }];
+        return [...acc, { name: key, type: 'unchanged', value: afterObj[key] }];
       }
       return [...acc, {
         name: key, type: 'changed', valueBefore: beforeObj[key], valueAfter: afterObj[key],
       }];
     }
 
-    return isAdded(beforeObj, afterObj, key) ? [...acc, { name: key, type: 'added', valueAfter: afterObj[key] }] : [...acc, { name: key, type: 'deleted', valueBefore: beforeObj[key] }];
+    return isAdded(beforeObj, afterObj, key) ? [...acc, { name: key, type: 'added', value: afterObj[key] }] : [...acc, { name: key, type: 'deleted', value: beforeObj[key] }];
   }, []);
 
   return result;
