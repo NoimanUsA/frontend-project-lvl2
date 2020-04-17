@@ -10,10 +10,8 @@ const parseFunctions = {
   '.ini': (filePath) => ini.parse(filePath),
 };
 
-const conversionToObj = (file) => {
+export default (file) => {
   const filePath = fs.readFileSync(path.resolve(process.cwd(), file), 'UTF-8');
   const fileFormat = path.extname(file);
   return parseFunctions[fileFormat](filePath);
 };
-
-export default conversionToObj;

@@ -7,12 +7,12 @@ const areKeysIndetity = (firstObj, secondObj, key) => firstObj[key] === secondOb
 const isAdded = (firstObj, secondObj, key) => !_.has(firstObj, key) && _.has(secondObj, key);
 
 
-const makeAst = (beforeObj, afterObj) => {
+const genAst = (beforeObj, afterObj) => {
   const keys = _.union(Object.keys(beforeObj), Object.keys(afterObj)).sort();
   const result = keys.reduce((acc, key) => {
     if (hasBoth(beforeObj, afterObj, key)) {
       if (areBothObject(beforeObj, afterObj, key)) {
-        return [...acc, { name: key, type: 'parents', children: makeAst(beforeObj[key], afterObj[key]) }];
+        return [...acc, { name: key, type: 'parents', children: genAst(beforeObj[key], afterObj[key]) }];
       }
       if (areKeysIndetity(beforeObj, afterObj, key)) {
         return [...acc, { name: key, type: 'unchanged', value: afterObj[key] }];
@@ -29,4 +29,4 @@ const makeAst = (beforeObj, afterObj) => {
 };
 
 
-export default makeAst;
+export default genAst;

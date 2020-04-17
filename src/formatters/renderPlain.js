@@ -16,16 +16,16 @@ const stringify = (value) => {
 };
 
 export default (ast) => {
-  const makePlain = (astTree, compoundName = '') => {
+  const genPlain = (astTree, compoundName = '') => {
     const typesObj = {
       changed: (el) => `Property '${compoundName}${el.name}' was changed from '${stringify(el.valueBefore)}' to '${stringify(el.valueAfter)}'`,
       deleted: (el) => `Property '${compoundName}${el.name}' was deleted`,
       added: (el) => `Property '${compoundName}${el.name}' was added with value: ${stringify(el.value)}`,
-      parents: (el) => makePlain(el.children, `${compoundName}${el.name}.`),
+      parents: (el) => genPlain(el.children, `${compoundName}${el.name}.`),
     };
 
     return `${astTree.filter((el) => el.type !== 'unchanged').map((el) => typesObj[el.type](el)).filter((el) => el !== '').join('\n')}`;
   };
 
-  return makePlain(ast);
+  return genPlain(ast);
 };

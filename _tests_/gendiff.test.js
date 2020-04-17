@@ -33,6 +33,10 @@ const plainTests = [
   ['before.ini', 'after.ini', 'plainResult'],
 ];
 
+const jsonTests = [
+  ['nestedBefore.json', 'nestedAfter.json', 'jsonNestedResult'],
+];
+
 
 test.each(treeTests)('tree diff (%p, %p)', (beforePath, afterPath, resultPath) => {
   const [before, after, result] = getPathOfFile(beforePath, afterPath, resultPath);
@@ -43,4 +47,9 @@ test.each(treeTests)('tree diff (%p, %p)', (beforePath, afterPath, resultPath) =
 test.each(plainTests)('plain diff (%p %p)', (beforePath, afterPath, resultPath) => {
   const [before, after, result] = getPathOfFile(beforePath, afterPath, resultPath);
   expect(makeDiff(before, after, 'plain')).toBe(fs.readFileSync(result, 'utf-8'));
+});
+
+test.each(jsonTests)('json (%p %p)', (beforePath, afterPath, resultPath) => {
+  const [before, after, result] = getPathOfFile(beforePath, afterPath, resultPath);
+  expect(makeDiff(before, after, 'json')).toBe(fs.readFileSync(result, 'utf-8'));
 });
