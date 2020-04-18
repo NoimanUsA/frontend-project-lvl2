@@ -9,7 +9,7 @@ const getPathOfFile = (before, after, result) => {
   return [path.resolve(dirPath, dirOfFormat, before), path.resolve(dirPath, dirOfFormat, after), path.resolve(dirPath, 'results', result)];
 };
 
-const treeTests = [
+const data = [
   ['before.json', 'empty.json', 'beforeWithEmpty'],
   ['empty.json', 'after.json', 'emptyWithAfter'],
   ['before.json', 'after.json', 'result'],
@@ -22,34 +22,19 @@ const treeTests = [
   ['empty.ini', 'after.ini', 'emptyWithAfter'],
   ['before.ini', 'after.ini', 'result'],
   ['nestedBefore.ini', 'nestedAfter.ini', 'nestedResult'],
-];
 
-const plainTests = [
-  ['nestedBefore.json', 'nestedAfter.json', 'plainNestedResult'],
-  ['nestedBefore.yml', 'nestedAfter.yml', 'plainNestedResult'],
-  ['nestedBefore.ini', 'nestedAfter.ini', 'plainNestedResult'],
-  ['before.json', 'after.json', 'plainResult'],
-  ['before.yml', 'after.yml', 'plainResult'],
-  ['before.ini', 'after.ini', 'plainResult'],
-];
+  ['nestedBefore.json', 'nestedAfter.json', 'plainNestedResult', 'plain'],
+  ['nestedBefore.yml', 'nestedAfter.yml', 'plainNestedResult', 'plain'],
+  ['nestedBefore.ini', 'nestedAfter.ini', 'plainNestedResult', 'plain'],
+  ['before.json', 'after.json', 'plainResult', 'plain'],
+  ['before.yml', 'after.yml', 'plainResult', 'plain'],
+  ['before.ini', 'after.ini', 'plainResult', 'plain'],
 
-const jsonTests = [
-  ['nestedBefore.json', 'nestedAfter.json', 'jsonNestedResult'],
+  ['nestedBefore.json', 'nestedAfter.json', 'jsonNestedResult', 'json'],
 ];
 
 
-test.each(treeTests)('tree diff (%p, %p)', (beforePath, afterPath, resultPath) => {
+test.each(data)('diff(%p, %p)', (beforePath, afterPath, resultPath, format = 'tree') => {
   const [before, after, result] = getPathOfFile(beforePath, afterPath, resultPath);
-  expect(makeDiff(before, after, 'tree')).toBe(fs.readFileSync(result, 'utf-8'));
-});
-
-
-test.each(plainTests)('plain diff (%p %p)', (beforePath, afterPath, resultPath) => {
-  const [before, after, result] = getPathOfFile(beforePath, afterPath, resultPath);
-  expect(makeDiff(before, after, 'plain')).toBe(fs.readFileSync(result, 'utf-8'));
-});
-
-test.each(jsonTests)('json (%p %p)', (beforePath, afterPath, resultPath) => {
-  const [before, after, result] = getPathOfFile(beforePath, afterPath, resultPath);
-  expect(makeDiff(before, after, 'json')).toBe(fs.readFileSync(result, 'utf-8'));
+  expect(makeDiff(before, after, format)).toBe(fs.readFileSync(result, 'utf-8'));
 });
