@@ -2,9 +2,9 @@ import conversionToObj from './parsers.js';
 import genAst from './ast.js';
 import render from './formatters/index.js';
 
-const genDiff = (beforeFile, afterFile, format) => {
-  const firstObj = conversionToObj(beforeFile);
-  const secondObj = conversionToObj(afterFile);
+const genDiff = (firstFileName, secondFileName, format) => {
+  const firstObj = conversionToObj(firstFileName);
+  const secondObj = conversionToObj(secondFileName);
 
   const ast = genAst(firstObj, secondObj);
 
