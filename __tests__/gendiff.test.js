@@ -3,9 +3,7 @@ import fs from 'fs';
 import genDiff from '../src/index.js';
 
 
-const getFilePath = (fileName) => {
-  return path.resolve(`${__dirname}/__fixtures__/${path.extname(fileName).substring(1)}`, `${fileName}`);
-};
+const getFilePath = (fileName) => path.resolve(`${__dirname}/__fixtures__/${path.extname(fileName).substring(1)}`, `${fileName}`);
 
 const data = [
   ['before.json', 'after.json', 'results/treeResult'],
@@ -17,6 +15,8 @@ const data = [
 
 
 test.each(data)('diff(%p, %p)', (beforePath, afterPath, resultPath, format = 'tree') => {
-  const [before, after, result] = [getFilePath(beforePath), getFilePath(afterPath), getFilePath(resultPath)];
+  const before = getFilePath(beforePath);
+  const after = getFilePath(afterPath);
+  const result = getFilePath(resultPath);
   expect(genDiff(before, after, format)).toBe(fs.readFileSync(result, 'utf-8'));
 });
