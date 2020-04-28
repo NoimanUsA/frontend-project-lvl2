@@ -1,18 +1,18 @@
 import fs from 'fs';
 import path from 'path';
-import conversionToObj from './parsers.js';
+import parse from './parsers.js';
 import genAst from './ast.js';
 import render from './formatters/index.js';
 
-const genDiff = (firstFileName, secondFileName, format) => {
+const genDiff = (firstFilePath, secondFilePath, format) => {
   const getFileData = (fileName) => fs.readFileSync(path.resolve(process.cwd(), fileName), 'UTF-8');
 
-  const firstFileData = getFileData(firstFileName);
-  const secondFileData = getFileData(secondFileName);
+  const firstFileData = getFileData(firstFilePath);
+  const secondFileData = getFileData(secondFilePath);
 
 
-  const firstObj = conversionToObj(firstFileData, path.extname(firstFileName));
-  const secondObj = conversionToObj(secondFileData, path.extname(secondFileName));
+  const firstObj = parse(firstFileData, path.extname(firstFilePath));
+  const secondObj = parse(secondFileData, path.extname(secondFilePath));
 
   const ast = genAst(firstObj, secondObj);
 
