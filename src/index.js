@@ -11,8 +11,8 @@ const genDiff = (firstFilePath, secondFilePath, format) => {
   const secondFileData = getFileData(secondFilePath);
 
 
-  const firstObj = parse(firstFileData, path.extname(firstFilePath));
-  const secondObj = parse(secondFileData, path.extname(secondFilePath));
+  const firstObj = parse(firstFileData, path.extname(firstFilePath).slice(1));
+  const secondObj = parse(secondFileData, path.extname(secondFilePath).slice(1));
 
   const ast = genAst(firstObj, secondObj);
 

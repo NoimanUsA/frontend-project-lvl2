@@ -24,7 +24,9 @@ export default (ast) => {
       parents: (el) => genPlain(el.children, `${compoundName}${el.name}.`),
     };
 
-    return `${astTree.filter((el) => el.type !== 'unchanged').map((el) => typesObj[el.type](el)).filter((el) => el !== '').join('\n')}`;
+    return astTree.filter((el) => el.type !== 'unchanged')
+      .map((el) => typesObj[el.type](el))
+      .join('\n');
   };
 
   return genPlain(ast);

@@ -24,7 +24,7 @@ const stringify = (value, depth) => {
 
 export default (ast) => {
   const genDiff = (astTree, depth = 1) => {
-    const type = {
+    const types = {
       unchanged: (el) => `${space(depth)}  ${el.name}: ${stringify(el.value, depth)}`,
       changed: (el) => [
         `${space(depth)}+ ${el.name}: ${stringify(el.valueAfter, depth)}`,
@@ -34,7 +34,12 @@ export default (ast) => {
       added: (el) => `${space(depth)}+ ${el.name}: ${stringify(el.value, depth)}`,
       parents: (el) => `${space(depth)}  ${el.name}: ${genDiff(el.children, depth + 2)}`,
     };
-    return `{\n${_.flatten(astTree.map((el) => type[el.type](el))).join('\n')}\n${space(depth - 1)}}`;
+
+    const finishedAst = astTree.map((el) => types[el.type](el))
+      .flat()
+      .join('\n');
+
+    return `{\n${finishedAst}\n${space(depth - 1)}}`;
   };
   return genDiff(ast);
 };
