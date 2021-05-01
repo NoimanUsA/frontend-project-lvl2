@@ -33,6 +33,6 @@ jobs:
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CI_SECRET_ID }}
       with:
-        coverageCommand: make test-with-coverage
+        coverageCommand: make test-coverage
         debug: true
      
