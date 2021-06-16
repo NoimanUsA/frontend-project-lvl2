@@ -1,6 +1,6 @@
 # GenDiff
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/b4bcfee02399cf15de63/maintainability)](https://codeclimate.com/github/NoimanUsA/frontend-project-lvl2/maintainability)  [![Test Coverage](https://api.codeclimate.com/v1/badges/b4bcfee02399cf15de63/test_coverage)](https://codeclimate.com/github/NoimanUsA/frontend-project-lvl2/test_coverage)  [![](https://github.com/NoimanUsA/frontend-project-lvl2/workflows/built/badge.svg)](https://github.com/NoimanUsA/frontend-project-lvl2/actions)
+[![Maintainability](https://api.codeclimate.com/v1/badges/b4bcfee02399cf15de63/maintainability)](https://codeclimate.com/github/NoimanUsA/frontend-project-lvl2/maintainability) [![](https://github.com/NoimanUsA/frontend-project-lvl2/workflows/built/badge.svg)](https://github.com/NoimanUsA/frontend-project-lvl2/actions)
 
 # Gendiff install
 [![asciicast](https://asciinema.org/a/MoHGoXXoC9mzgKNTCjS8WvfRE.svg)](https://asciinema.org/a/MoHGoXXoC9mzgKNTCjS8WvfRE)
